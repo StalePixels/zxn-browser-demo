@@ -1,0 +1,32 @@
+
+IF !DEFINED_startup
+	defc	DEFINED_startup = 1
+	defc startup = 1
+	IFNDEF startup
+	ENDIF
+ENDIF
+
+
+IF !DEFINED_REGISTER_SP 
+	defc	DEFINED_REGISTER_SP  = 1
+	defc REGISTER_SP  = 0xbfe0
+	IFNDEF REGISTER_SP 
+	ENDIF
+ENDIF
+
+
+IF !DEFINED_CRT_printf_format
+	defc	DEFINED_CRT_printf_format = 1
+	defc CRT_printf_format = 0x00000202
+ELSE
+	UNDEFINE temp_printf_format
+	defc temp_printf_format = CRT_printf_format
+	UNDEFINE CRT_printf_format
+	defc CRT_printf_format = temp_printf_format | 0x00000202
+ENDIF
+
+
+IF !NEED_printf
+	DEFINE	NEED_printf
+ENDIF
+
